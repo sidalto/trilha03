@@ -1,0 +1,24 @@
+{
+    "name": "webjump/pet-kind-graph-ql",
+    "description": "Pet Kind",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "type": "magento2-module",
+    "authors": [
+        {
+            "name": "Sidalto Pereira",
+            "email": "sidalto.pereira@webjump.com.br"
+        }
+    ],
+    "require": {
+        "magento/framework": "*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Webjump\\PetKindGraphQL\\": ""
+        }
+    }
+}

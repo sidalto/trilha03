@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author      Webjump Develop Team <dev@webjump.com.br>
+ * @copyright   2022 Webjump (http://www.webjump.com.br)
+ * @license     http://www.webjump.com.br Copyright
+ * @link        http://www.webjump.com.br
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Webjump\PetKind\Api\Data\PetKindInterface" type="Webjump\PetKind\Model\Data\PetKind"/>
+    <preference for="Webjump\PetKind\Api\PetKindRepositoryInterface" type="Webjump\PetKind\Model\PetKindRepository"/>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="pets_petkind_listing_data_source" xsi:type="string">Webjump\PetKind\Model\ResourceModel\PetKind\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Webjump\PetKind\Model\ResourceModel\PetKind\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">pet_kind</argument>
+            <argument name="resourceModel" xsi:type="string">Webjump\PetKind\Model\ResourceModel\PetKind\Collection</argument>
+        </arguments>
+    </virtualType>
+</config>

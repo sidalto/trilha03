@@ -1,0 +1,24 @@
+{
+    "name": "webjump/pet-kind-admin-ui",
+    "description": "Pet Kind Admin Ui",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "type": "magento2-module",
+    "authors": [
+        {
+            "name": "Sidalto Pereira",
+            "email": "sidalto.pereira@webjump.com.br"
+        }
+    ],
+    "require": {
+        "magento/framework": "*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Webjump\\PetKindAdminUi\\": ""
+        }
+    }
+}

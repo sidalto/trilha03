@@ -1,0 +1,26 @@
+<?php
+/**
+ * @author      Webjump Develop Team <dev@webjump.com.br>
+ * @copyright   2022 Webjump (http://www.webjump.com.br)
+ * @license     http://www.webjump.com.br Copyright
+ * @link        http://www.webjump.com.br
+ */
+
+declare(strict_types=1);
+
+/**
+ * @var Magento\Customer\Block\Account\Customer $block
+ * @var Webjump\PetKind\ViewModel\ShowPetKindAfterLogin $viewModel
+ */
+
+$viewModel = $block->getViewModel();
+
+?>
+<?php
+try {
+    if ($viewModel->isLoggedIn() && $viewModel->isModuleEnable()) :
+        echo $viewModel->getPetKindCustomer();
+    endif;
+} catch (\Magento\Framework\Exception\NoSuchEntityException $e) {
+}
+?>

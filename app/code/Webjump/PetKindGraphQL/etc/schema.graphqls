@@ -1,0 +1,62 @@
+directive @doc(description: String="") on QUERY
+    | MUTATION
+    | FIELD
+    | FRAGMENT_DEFINITION
+    | FRAGMENT_SPREAD
+    | INLINE_FRAGMENT
+    | SCHEMA
+    | SCALAR
+    | OBJECT
+    | FIELD_DEFINITION
+    | ARGUMENT_DEFINITION
+    | INTERFACE
+    | UNION
+    | ENUM
+    | ENUM_VALUE
+    | INPUT_OBJECT
+    | INPUT_FIELD_DEFINITION
+
+directive @resolver(class: String="") on QUERY
+    | MUTATION
+    | FIELD
+    | FRAGMENT_DEFINITION
+    | FRAGMENT_SPREAD
+    | INLINE_FRAGMENT
+    | SCHEMA
+    | SCALAR
+    | OBJECT
+    | FIELD_DEFINITION
+    | ARGUMENT_DEFINITION
+    | ENUM
+    | ENUM_VALUE
+    | INPUT_OBJECT
+    | INPUT_FIELD_DEFINITION
+
+directive @typeResolver(class: String="") on UNION
+    | INTERFACE
+    | OBJECT
+
+directive @cache(cacheIdentity: String="" cacheable: Boolean=false) on QUERY
+
+type PetKind {
+    entity_id: ID!
+    name: String!
+    description: String
+    created_at: String
+}
+
+input PetKindInput {
+    name: String
+    description: String
+}
+
+type Query {
+    getPetKind(id: Int!): PetKind @resolver(class: "Webjump\\PetKindGraphQL\\Model\\Resolver\\GetPetKind") @doc(description: "Get Pet Kind by id")
+    getAllPetKinds(searchCriteria: String): [PetKind] @resolver(class: "Webjump\\PetKindGraphQL\\Model\\Resolver\\GetAllPetKind") @doc(description: "Get Collection of the Pet Kinds")
+}
+
+type Mutation {
+    createPetKind(petKind: PetKindInput!): Int! @resolver(class: "Webjump\\PetKindGraphQL\\Model\\Resolver\\CreatePetKind") @doc(description: "Create a new Pet Kind")
+    updatePetKind(petKind: PetKindInput!, id: Int!): Int! @resolver(class: "Webjump\\PetKindGraphQL\\Model\\Resolver\\UpdatePetKind") @doc(description: "Update existing Pet Kind")
+    deletePetKind(id: Int!): Boolean! @resolver(class: "Webjump\\PetKindGraphQL\\Model\\Resolver\\DeletePetKind") @doc(description: "Delete existing Pet Kind")
+}

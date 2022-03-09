@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author      Webjump Develop Team <dev@webjump.com.br>
+ * @copyright   2022 Webjump (http://www.webjump.com.br)
+ * @license     http://www.webjump.com.br Copyright
+ * @link        http://www.webjump.com.br
+ */
+-->
+
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="pet_kind" resource="default" engine="innodb" comment="Pet Kind Table">
+        <column xsi:type="int" name="entity_id" padding="11" unsigned="true" nullable="false"  identity="true" comment="Pet Id" />
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Pet Kind name" />
+        <column xsi:type="text" name="description" nullable="true" comment="Pet Kind description"/>
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" comment="created_at" />
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+    </table>
+</schema>

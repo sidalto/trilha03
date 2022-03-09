@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author      Webjump Develop Team <dev@webjump.com.br>
+ * @copyright   2022 Webjump (http://www.webjump.com.br)
+ * @license     http://www.webjump.com.br Copyright
+ * @link        http://www.webjump.com.br
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Webjump_PetKindAdminUi::menu" sortOrder="10" disabled="false" title="Pets Menu">
+                    <resource id="Webjump_PetKindAdminUi::item" sortOrder="20" disabled="false" title="Pet Kind"/>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

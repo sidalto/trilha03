@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author      Webjump Develop Team <dev@webjump.com.br>
+ * @copyright   2022 Webjump (http://www.webjump.com.br)
+ * @license     http://www.webjump.com.br Copyright
+ * @link        http://www.webjump.com.br
+ */
+-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/petkinds" method="GET">
+        <service class="Webjump\PetKind\Api\PetKindRepositoryInterface" method="getList" />
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/petkinds/:id" method="GET">
+        <service class="Webjump\PetKind\Api\PetKindRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/petkinds" method="POST">
+        <service class="Webjump\PetKind\Api\PetKindRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/petkinds/:id" method="PUT">
+        <service class="Webjump\PetKind\Api\PetKindRepositoryInterface" method="save" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/petkinds/:id" method="DELETE">
+        <service class="Webjump\PetKind\Api\PetKindRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+</routes>

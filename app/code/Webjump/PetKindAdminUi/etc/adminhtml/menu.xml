@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author      Webjump Develop Team <dev@webjump.com.br>
+ * @copyright   2022 Webjump (http://www.webjump.com.br)
+ * @license     http://www.webjump.com.br Copyright
+ * @link        http://www.webjump.com.br
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Webjump_PetKindAdminUi::menu" title="Pets" module="Webjump_PetKindAdminUi" resource="Webjump_PetKindAdminUi::menu" sortOrder="10"/>
+        <add id="Webjump_PetKindAdminUi::item" title="Pet Kind" module="Webjump_PetKindAdminUi" resource="Webjump_PetKindAdminUi::item" parent="Webjump_PetKindAdminUi::menu" action="pets/petkind"/>
+    </menu>
+</config>
