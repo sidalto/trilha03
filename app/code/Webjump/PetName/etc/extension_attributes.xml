@@ -10,6 +10,6 @@
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/etc/extension_attributes.xsd">
     <extension_attributes for="Magento\Customer\Api\Data\CustomerInterface">
-        <attribute code="pet_name" type="string" />
+        <attribute code="pet_name" type="Webjump\PetName\Api\Data\PetNameInterface" />
     </extension_attributes>
 </config>

@@ -42,13 +42,6 @@ interface PetKindRepositoryInterface
      */
     public function getList(SearchCriteriaInterface $searchCriteria): SearchResultsInterface;
 
-//    /**
-//     * Get collection the pet kind
-//     *
-//     * @return CollectionFactory[]
-//     */
-//    public function getPetKindData(): array;
-
     /**
      * Delete a specified pet kind.
      *

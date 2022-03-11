@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author      Webjump Develop Team <dev@webjump.com.br>
+ * @copyright   2022 Webjump (http://www.webjump.com.br)
+ * @license     http://www.webjump.com.br Copyright
+ * @link        http://www.webjump.com.br
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Webjump\PetName\Api\Data\PetNameInterface" type="Webjump\PetName\Model\Data\PetName"/>
+    <preference for="Webjump\PetName\Api\PetNameRepositoryInterface" type="Webjump\PetName\Model\PetNameRepository"/>
+    <type name="Magento\Customer\Api\Data\CustomerInterface">
+        <plugin name="CustomerAttributesLoad" type="Webjump\PetName\Plugin\Magento\Customer\CustomerAttributesLoad"/>
+    </type>
+    <type name="Magento\Customer\Api\CustomerRepositoryInterface">
+        <plugin
+            name="CustomerRepositoryPlugin"
+            type="Webjump\PetName\Plugin\Magento\Customer\Model\ResourceModel\CustomerRepositoryPlugin"
+        />
+    </type>
+</config>

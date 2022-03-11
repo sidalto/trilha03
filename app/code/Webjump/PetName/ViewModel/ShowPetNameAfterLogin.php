@@ -8,16 +8,19 @@
 
 declare(strict_types=1);
 
-namespace Webjump\PetKind\ViewModel;
+namespace Webjump\PetName\ViewModel;
 
-use Magento\Customer\Model\CustomerFactory;
+use Magento\Framework\Exception\LocalizedException;
 use Webjump\PetKind\Model\Config;
+use Magento\Customer\Api\CustomerRepositoryInterface;
+use Magento\Customer\Api\Data\CustomerExtensionInterface;
+use Magento\Customer\Model\Session;
 use Magento\Customer\Model\SessionFactory;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Store\Model\StoreManagerInterface;
 
-class ShowPetKindAfterLogin implements ArgumentInterface
+class ShowPetNameAfterLogin implements ArgumentInterface
 {
     /**
      * @var Config
@@ -25,9 +28,9 @@ class ShowPetKindAfterLogin implements ArgumentInterface
     private Config $config;
 
     /**
-     * @var SessionFactory
+     * @var Session
      */
-    private SessionFactory $sessionFactory;
+    private Session $session;
 
     /**
      * @var StoreManagerInterface
@@ -35,18 +38,26 @@ class ShowPetKindAfterLogin implements ArgumentInterface
     private StoreManagerInterface $storeManager;
 
     /**
-     * @param SessionFactory $sessionFactory
+     * @var CustomerRepositoryInterface
+     */
+    private CustomerRepositoryInterface $customerRepository;
+
+    /**
+     * @param Session $session
      * @param Config $config
      * @param StoreManagerInterface $storeManager
+     * @param CustomerRepositoryInterface $customerRepository
      */
     public function __construct(
-        SessionFactory $sessionFactory,
+        Session $session,
         Config $config,
-        StoreManagerInterface $storeManager
+        StoreManagerInterface $storeManager,
+        CustomerRepositoryInterface $customerRepository
     ) {
-        $this->sessionFactory = $sessionFactory;
+        $this->session = $session;
         $this->config = $config;
         $this->storeManager = $storeManager;
+        $this->customerRepository = $customerRepository;
     }
 
     /**
@@ -56,7 +67,7 @@ class ShowPetKindAfterLogin implements ArgumentInterface
      */
     public function isLoggedIn(): bool
     {
-        return $this->sessionFactory->create()->isLoggedIn();
+        return $this->session->isLoggedIn();
     }
 
     /**
@@ -74,13 +85,17 @@ class ShowPetKindAfterLogin implements ArgumentInterface
 
     /**
      * @return string
+     * @throws NoSuchEntityException
+     * @throws LocalizedException
      */
-    public function getPetKindCustomer(): string
+    public function getPetNameCustomer(): string
     {
-        $customer = $this->sessionFactory->create()->getCustomer();
+        $customerId = $this->session->getCustomer()->getEntityId();
+        $customer = $this->customerRepository->getById($customerId);
 
-        var_dump($customer->getExtensionAttributes()->getPetName());
-        die();
-//        return $customer->getExtensionAttribute('pet_name')->getValue();
+        return $customer
+            ->getExtensionAttributes()
+            ->getPetName()
+            ->getName();
     }
 }
