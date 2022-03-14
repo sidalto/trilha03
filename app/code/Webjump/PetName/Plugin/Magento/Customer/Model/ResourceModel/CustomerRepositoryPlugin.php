@@ -12,7 +12,7 @@ namespace Webjump\PetName\Plugin\Magento\Customer\Model\ResourceModel;
 
 use Magento\Customer\Api\Data\CustomerSearchResultsInterface;
 use Magento\Framework\Api\SearchCriteriaInterface;
-use Webjump\PetName\Api\PetNameRepositoryInterface;
+use Magento\Framework\App\RequestInterface;
 use Magento\Customer\Api\Data\CustomerInterface;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 
@@ -29,23 +29,23 @@ class CustomerRepositoryPlugin
     private CustomerRepositoryInterface $customerRepository;
 
     /**
-     * @var PetNameRepositoryInterface
+     * @var RequestInterface
      */
-    private PetNameRepositoryInterface $petNameRepository;
+    private RequestInterface $request;
 
     /**
      * @param CustomerInterface $customer
      * @param CustomerRepositoryInterface $customerRepository
-     * @param PetNameRepositoryInterface $petNameRepository
+     * @param RequestInterface $request
      */
     public function __construct(
         CustomerInterface $customer,
         CustomerRepositoryInterface $customerRepository,
-        PetNameRepositoryInterface $petNameRepository
+        RequestInterface $request
     ) {
         $this->customer = $customer;
         $this->customerRepository = $customerRepository;
-        $this->petNameRepository = $petNameRepository;
+        $this->request = $request;
     }
 
     /**
@@ -57,7 +57,7 @@ class CustomerRepositoryPlugin
         CustomerRepositoryInterface $subject,
         CustomerInterface $result
     ): CustomerInterface {
-        $petName = $this->petNameRepository->getCustomerId((int)$result->getId());
+        $petName = $result->getCustomAttribute('pet_name')->getValue();
         $extensionAttributes = $result->getExtensionAttributes();
         $extensionAttributes->setPetName($petName);
         $result->setExtensionAttributes($extensionAttributes);
@@ -76,7 +76,7 @@ class CustomerRepositoryPlugin
         CustomerInterface $result,
         int $customerId
     ): CustomerInterface {
-        $petName = $this->petNameRepository->getCustomerId((int)$result->getId());
+        $petName = $result->getCustomAttribute('pet_name')->getValue();
         $extensionAttributes = $result->getExtensionAttributes();
         $extensionAttributes->setPetName($petName);
         $result->setExtensionAttributes($extensionAttributes);
@@ -98,7 +98,7 @@ class CustomerRepositoryPlugin
         $customers = [];
 
         foreach ($results->getItems() as $entity) {
-            $petName = $this->petNameRepository->getCustomerId((int)$entity->getId());
+            $petName = $entity->getCustomAttribute('pet_name')->getValue();
             $extensionAttributes = $entity->getExtensionAttributes();
             $extensionAttributes->setPetName($petName);
             $entity->setExtensionAttributes($extensionAttributes);
@@ -109,23 +109,5 @@ class CustomerRepositoryPlugin
         $results->setItems($customers);
 
         return $results;
-    }
-
-    /**
-     * @param CustomerRepositoryInterface $subject
-     * @param CustomerInterface $result
-     * @return CustomerInterface
-     */
-    public function afterSave(
-        CustomerRepositoryInterface $subject,
-        CustomerInterface $result
-    ): CustomerInterface {
-        $extensionAttributes = $result->getExtensionAttributes();
-        $petName = $extensionAttributes->getPetName();
-        $this->petNameRepository->save($petName);
-        $extensionAttributes->setPetName($petName);
-        $result->setExtensionAttributes($extensionAttributes);
-
-        return $result;
     }
 }

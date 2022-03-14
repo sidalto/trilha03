@@ -8,10 +8,8 @@
 
 declare(strict_types=1);
 
-namespace Webjump\PetKind\Setup\Patch\Data;
+namespace Webjump\PetName\Setup\Patch\Data;
 
-use Webjump\PetKind\Model\Config\Source\SelectPetKind;
-use Webjump\PetKind\Model\Config\Source\SelectPetName;
 use Magento\Customer\Api\CustomerMetadataInterface;
 use Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
 use Magento\Customer\Model\ResourceModel\Attribute as AttributeResource;
@@ -23,7 +21,7 @@ use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Zend_Validate_Exception;
 
-class CreateAttributePetKindToCustomer implements DataPatchInterface, PatchRevertableInterface
+class CreateAttributePetNameToCustomer implements DataPatchInterface, PatchRevertableInterface
 {
     /**
      * @var ModuleDataSetupInterface
@@ -48,7 +46,7 @@ class CreateAttributePetKindToCustomer implements DataPatchInterface, PatchRever
     /**
      * @const ATTRIBUTE_CODE
      */
-    public const ATTRIBUTE_CODE = 'pet_kind';
+    public const ATTRIBUTE_CODE = 'pet_name';
 
     /**
      * @param ModuleDataSetupInterface $moduleDataSetup
@@ -124,12 +122,13 @@ class CreateAttributePetKindToCustomer implements DataPatchInterface, PatchRever
     {
         return [
             'type' => 'varchar',
-            'label' => __('Pet Kind'),
-            'input' => 'select',
+            'label' => __('Pet Name'),
+            'input' => 'text',
             'is_global' => false,
             'global' => ScopedAttributeInterface::SCOPE_STORE,
             'backend' => '',
-            'source' => SelectPetKind::class,
+            'source' => '',
+            'sort_order' => 10,
             'required' => false,
             'user_defined' => true,
             'use_in_filter_options' => true,

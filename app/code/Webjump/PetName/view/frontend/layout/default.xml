@@ -10,19 +10,12 @@
 
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
-        <referenceBlock name="header.links" template="Webjump_PetName::account/customer.phtml">
-            <arguments>
-                <argument name="view_model" xsi:type="object">Webjump\PetName\ViewModel\ShowPetNameAfterLogin</argument>
-            </arguments>
-            <block class="Magento\Customer\Block\Account\AuthorizationLink" name="authorization-link-login" template="Magento_Customer::account/link/authorization.phtml">
+        <referenceBlock name="header.links">
+            <block class="Magento\Customer\Block\Account\Customer" name="pet-name" template="Webjump_PetName::account/customer.phtml">
                 <arguments>
-                    <argument name="sortOrder" xsi:type="number">10</argument>
+                    <argument name="view_model" xsi:type="object">Webjump\PetName\ViewModel\ShowPetNameAfterLogin</argument>
                 </arguments>
             </block>
         </referenceBlock>
-        <move element="header" destination="header.links" before="-"/>
-        <move element="register-link" destination="header.links"/>
-        <move element="top.links" destination="customer"/>
-        <move element="authorization-link" destination="top.links" after="-"/>
     </body>
 </page>

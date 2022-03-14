@@ -9,15 +9,12 @@
 -->
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <preference for="Webjump\PetName\Api\Data\PetNameInterface" type="Webjump\PetName\Model\Data\PetName"/>
-    <preference for="Webjump\PetName\Api\PetNameRepositoryInterface" type="Webjump\PetName\Model\PetNameRepository"/>
     <type name="Magento\Customer\Api\Data\CustomerInterface">
-        <plugin name="CustomerAttributesLoad" type="Webjump\PetName\Plugin\Magento\Customer\CustomerAttributesLoad"/>
+        <plugin name="CustomerAttributesLoad"
+                type="Webjump\PetName\Plugin\Magento\Customer\CustomerAttributesLoad"/>
     </type>
     <type name="Magento\Customer\Api\CustomerRepositoryInterface">
-        <plugin
-            name="CustomerRepositoryPlugin"
-            type="Webjump\PetName\Plugin\Magento\Customer\Model\ResourceModel\CustomerRepositoryPlugin"
-        />
+        <plugin name="CustomerRepositoryPlugin"
+                type="Webjump\PetName\Plugin\Magento\Customer\Model\ResourceModel\CustomerRepositoryPlugin"/>
     </type>
 </config>

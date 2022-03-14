@@ -10,15 +10,15 @@ declare(strict_types=1);
 
 namespace Webjump\PetName\ViewModel;
 
-use Magento\Framework\Exception\LocalizedException;
+use Magento\Customer\Api\Data\CustomerInterface;
+use Webjump\PetKind\Api\PetKindRepositoryInterface;
 use Webjump\PetKind\Model\Config;
 use Magento\Customer\Api\CustomerRepositoryInterface;
-use Magento\Customer\Api\Data\CustomerExtensionInterface;
 use Magento\Customer\Model\Session;
-use Magento\Customer\Model\SessionFactory;
+use Magento\Store\Model\StoreManagerInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
-use Magento\Store\Model\StoreManagerInterface;
+use Magento\Framework\Exception\LocalizedException;
 
 class ShowPetNameAfterLogin implements ArgumentInterface
 {
@@ -43,21 +43,29 @@ class ShowPetNameAfterLogin implements ArgumentInterface
     private CustomerRepositoryInterface $customerRepository;
 
     /**
+     * @var PetKindRepositoryInterface
+     */
+    private PetKindRepositoryInterface $petKindRepository;
+
+    /**
      * @param Session $session
      * @param Config $config
      * @param StoreManagerInterface $storeManager
      * @param CustomerRepositoryInterface $customerRepository
+     * @param PetKindRepositoryInterface $petKindRepository
      */
     public function __construct(
         Session $session,
         Config $config,
         StoreManagerInterface $storeManager,
-        CustomerRepositoryInterface $customerRepository
+        CustomerRepositoryInterface $customerRepository,
+        PetKindRepositoryInterface $petKindRepository
     ) {
         $this->session = $session;
         $this->config = $config;
         $this->storeManager = $storeManager;
         $this->customerRepository = $customerRepository;
+        $this->petKindRepository = $petKindRepository;
     }
 
     /**
@@ -84,18 +92,44 @@ class ShowPetNameAfterLogin implements ArgumentInterface
     }
 
     /**
-     * @return string
+     * @return CustomerInterface|null
+     * @throws LocalizedException
+     * @throws NoSuchEntityException
+     */
+    public function getCustomer(): ?CustomerInterface
+    {
+        $customerId = $this->session->getCustomerId();
+
+        return $this->customerRepository->getById($customerId);
+    }
+
+    /**
+     * @return string|null
      * @throws NoSuchEntityException
      * @throws LocalizedException
      */
-    public function getPetNameCustomer(): string
+    public function getPetNameCustomer(): ?string
     {
-        $customerId = $this->session->getCustomer()->getEntityId();
-        $customer = $this->customerRepository->getById($customerId);
-
-        return $customer
+        return $this
+            ->getCustomer()
             ->getExtensionAttributes()
-            ->getPetName()
+            ->getPetName();
+    }
+
+    /**
+     * @return string|null
+     * @throws LocalizedException
+     * @throws NoSuchEntityException
+     */
+    public function getPetKindCustomer(): ?string
+    {
+        $petKindId = $this
+            ->getCustomer()
+            ->getCustomAttribute('pet_kind')
+            ->getValue();
+
+        return $this->petKindRepository
+            ->getById((int)$petKindId)
             ->getName();
     }
 }
