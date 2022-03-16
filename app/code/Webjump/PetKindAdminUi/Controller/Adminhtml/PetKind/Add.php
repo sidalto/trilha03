@@ -21,6 +21,8 @@ use Magento\Framework\View\Result\PageFactory;
 class Add extends Action implements HttpGetActionInterface
 {
     /**
+     * Execute method to Add controller
+     *
      * @return ResultInterface
      */
     public function execute(): ResultInterface

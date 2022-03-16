@@ -43,8 +43,13 @@ class DeletePetKind implements ResolverInterface
      * @param array|null $args
      * @return bool
      */
-    public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null): bool
-    {
+    public function resolve(
+        Field $field,
+        $context,
+        ResolveInfo $info,
+        array $value = null,
+        array $args = null
+    ): bool {
         return $this->petKindRepositoryInterface->deleteById($args['id']);
     }
 }

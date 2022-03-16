@@ -27,6 +27,8 @@ class SelectPetKind extends AbstractSource implements OptionSourceInterface
     protected $_options = [];
 
     /**
+     * Constructor class to select PetKind class
+     *
      * @param CollectionFactory $collectionFactory
      */
     public function __construct(CollectionFactory $collectionFactory)
@@ -58,7 +60,10 @@ class SelectPetKind extends AbstractSource implements OptionSourceInterface
     }
 
     /**
+     * Get all options to pet kind
+     *
      * @inheritDoc
+     * @return array
      */
     public function getAllOptions(): array
     {

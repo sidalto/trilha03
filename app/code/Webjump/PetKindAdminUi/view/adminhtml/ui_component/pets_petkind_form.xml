@@ -21,7 +21,7 @@
             <button name="back" class="Webjump\PetKindAdminUi\Block\Adminhtml\PetKind\Edit\BackButton"/>
             <button name="delete" class="Webjump\PetKindAdminUi\Block\Adminhtml\PetKind\Edit\DeleteButton"/>
             <button name="save" class="Webjump\PetKindAdminUi\Block\Adminhtml\PetKind\Edit\SaveButton"/>
-<!--            <button name="save_and_continue" class="Webjump\PetKindAdminUi\Block\Adminhtml\PetKind\SaveAndContinueButton"/>-->
+            <button name="save_and_continue" class="Webjump\PetKindAdminUi\Block\Adminhtml\PetKind\SaveAndContinueButton"/>
         </buttons>
         <namespace>pets_petkind_form</namespace>
         <dataScope>data</dataScope>

@@ -22,7 +22,7 @@ use Webjump\PetKindAdminUi\Controller\Adminhtml\Base;
 class Delete extends Base implements HttpGetActionInterface
 {
     /**
-     * Delete action
+     * Execute method to Delete controller
      *
      * @return ResultInterface
      */

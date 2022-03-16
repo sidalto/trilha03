@@ -22,6 +22,8 @@ class CustomerAttributesLoad
     private CustomerExtensionFactory $extensionFactory;
 
     /**
+     * Constructor to CustomerAttributesLoad class
+     *
      * @param CustomerExtensionFactory $extensionFactory
      */
     public function __construct(CustomerExtensionFactory $extensionFactory)
@@ -30,7 +32,7 @@ class CustomerAttributesLoad
     }
 
     /**
-     * Loads customer entity extension attributes
+     * After plugin that loads customer entity extension attributes
      *
      * @param CustomerInterface $entity
      * @param CustomerExtensionInterface|null $extension

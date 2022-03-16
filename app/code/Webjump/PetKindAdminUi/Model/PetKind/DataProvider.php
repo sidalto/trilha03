@@ -33,6 +33,8 @@ class DataProvider extends AbstractDataProvider
     protected $dataPersistor;
 
     /**
+     * Constructor to DataProvider class
+     *
      * @param CollectionFactory $collectionFactory
      * @param DataPersistorInterface $dataPersistor
      * @param string $name
@@ -62,6 +64,8 @@ class DataProvider extends AbstractDataProvider
     }
 
     /**
+     * Get data method to DataProvider class of the UiComponent
+     *
      * @return array|null
      */
     public function getData(): ?array

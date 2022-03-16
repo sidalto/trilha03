@@ -34,6 +34,8 @@ class CustomerRepositoryPlugin
     private RequestInterface $request;
 
     /**
+     * Constructor to CustomerRepositoryPlugin class
+     *
      * @param CustomerInterface $customer
      * @param CustomerRepositoryInterface $customerRepository
      * @param RequestInterface $request
@@ -49,6 +51,8 @@ class CustomerRepositoryPlugin
     }
 
     /**
+     * After plugin in the Repository get method
+     *
      * @param CustomerRepositoryInterface $subject
      * @param CustomerInterface $result
      * @return CustomerInterface
@@ -66,6 +70,8 @@ class CustomerRepositoryPlugin
     }
 
     /**
+     * After plugin in the Repository getById method
+     *
      * @param CustomerRepositoryInterface $subject
      * @param CustomerInterface $result
      * @param int $customerId
@@ -85,6 +91,8 @@ class CustomerRepositoryPlugin
     }
 
     /**
+     * After plugin in the Repository getList method
+     *
      * @param CustomerRepositoryInterface $subject
      * @param CustomerSearchResultsInterface $results
      * @param SearchCriteriaInterface $searchCriteria

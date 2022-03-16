@@ -34,7 +34,6 @@
             </storageConfig>
             <updateUrl path="mui/index/render"/>
         </settings>
-<!--        <aclResource>Webjump_PetKindAdminUi::item</aclResource>-->
         <dataProvider name="pets_petkind_listing_data_source" class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
             <settings>
                 <requestFieldName>entity_id</requestFieldName>

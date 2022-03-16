@@ -27,7 +27,7 @@ class Config implements ConfigInterface
     private ConfigInterface $config;
 
     /**
-     * Config constructor
+     * Constructor to Config class
      *
      * @param ScopeConfigInterface $scopeConfig
      */

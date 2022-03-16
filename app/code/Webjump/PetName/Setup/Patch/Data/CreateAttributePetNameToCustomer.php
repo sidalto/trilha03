@@ -49,6 +49,8 @@ class CreateAttributePetNameToCustomer implements DataPatchInterface, PatchRever
     public const ATTRIBUTE_CODE = 'pet_name';
 
     /**
+     * Constructor to CreateAttributePetNameToCustomer class
+     *
      * @param ModuleDataSetupInterface $moduleDataSetup
      * @param CustomerSetupFactory $customerSetupFactory
      * @param AttributeResource $attributeResource

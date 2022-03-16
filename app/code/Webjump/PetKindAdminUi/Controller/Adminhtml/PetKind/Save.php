@@ -20,6 +20,8 @@ use Webjump\PetKindAdminUi\Controller\Adminhtml\Base;
 class Save extends Base implements HttpPostActionInterface
 {
     /**
+     * Result method to Save controller
+     *
      * @return ResultInterface
      */
     public function execute(): ResultInterface

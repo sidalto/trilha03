@@ -26,7 +26,7 @@ class Actions extends Column
     protected UrlInterface $urlBuilder;
 
     /**
-     * PetKind Actions constructor.
+     * Constructor to pet kind Actions class.
      *
      * @param ContextInterface $context
      * @param UiComponentFactory $uiComponentFactory

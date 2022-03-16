@@ -48,6 +48,8 @@ class ShowPetNameAfterLogin implements ArgumentInterface
     private PetKindRepositoryInterface $petKindRepository;
 
     /**
+     * Constructor to ShowPetNameAfterLogin class
+     *
      * @param Session $session
      * @param Config $config
      * @param StoreManagerInterface $storeManager
@@ -92,6 +94,8 @@ class ShowPetNameAfterLogin implements ArgumentInterface
     }
 
     /**
+     * Method to return current customer in session
+     *
      * @return CustomerInterface|null
      * @throws LocalizedException
      * @throws NoSuchEntityException
@@ -104,6 +108,8 @@ class ShowPetNameAfterLogin implements ArgumentInterface
     }
 
     /**
+     * Method to return the pet name of the customer
+     *
      * @return string|null
      * @throws NoSuchEntityException
      * @throws LocalizedException
@@ -117,6 +123,8 @@ class ShowPetNameAfterLogin implements ArgumentInterface
     }
 
     /**
+     * Method to return the pet kind of the customer
+     *
      * @return string|null
      * @throws LocalizedException
      * @throws NoSuchEntityException

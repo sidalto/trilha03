@@ -43,8 +43,13 @@ class GetPetKind implements ResolverInterface
      * @param array|null $args
      * @return PetKindInterface
      */
-    public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null): PetKindInterface
-    {
+    public function resolve(
+        Field $field,
+        $context,
+        ResolveInfo $info,
+        array $value = null,
+        array $args = null
+    ): PetKindInterface {
         return $this->petKindRepositoryInterface->getById($args['id']);
     }
 }

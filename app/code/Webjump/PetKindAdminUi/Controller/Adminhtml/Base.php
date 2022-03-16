@@ -67,6 +67,8 @@ abstract class Base extends Action
     protected DataPersistorInterface $dataPersistor;
 
     /**
+     * Constructor to Base class
+     *
      * @param PetKindRepositoryInterface $petKindRepository
      * @param PetKindFactory $petKindFactory
      * @param Context $context
@@ -87,7 +89,7 @@ abstract class Base extends Action
         MessageManagerInterface $messageManager,
         RequestInterface $request,
         DataPersistorInterface $dataPersistor
-    ){
+    ) {
         parent::__construct($context);
         $this->petKindRepository = $petKindRepository;
         $this->petKindFactory = $petKindFactory;
@@ -108,8 +110,6 @@ abstract class Base extends Action
      */
     public function initPage(Page $resultPage): Page
     {
-//        $resultPage->setActiveMenu(self::ADMIN_RESOURCE)
-//            ->addBreadcrumb(__('Pets'), __('Pets'))
         $resultPage->addBreadcrumb(__('Pets'), __('Pets'))
             ->addBreadcrumb(__('Pet Kind'), __('Pet Kind'));
 

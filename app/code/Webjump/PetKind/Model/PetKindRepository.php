@@ -65,6 +65,8 @@ class PetKindRepository implements PetKindRepositoryInterface
     private CollectionProcessorInterface $collectionProcessorInterface;
 
     /**
+     * Constructor to PetKindRepository class
+     *
      * @param PetKindInterfaceFactory $petKindInterfaceFactory
      * @param CollectionFactory $collectionFactory
      * @param SearchResultsFactory $searchResultsFactory
@@ -90,6 +92,8 @@ class PetKindRepository implements PetKindRepositoryInterface
     }
 
     /**
+     * Save method to pet kind
+     *
      * @param PetKindInterface $pet
      * @param int $id
      * @return int
@@ -115,6 +119,8 @@ class PetKindRepository implements PetKindRepositoryInterface
     }
 
     /**
+     * Get by id method to pet kind
+     *
      * @param int $id
      * @return PetKindInterface
      * @throws NoSuchEntityException
@@ -132,6 +138,8 @@ class PetKindRepository implements PetKindRepositoryInterface
     }
 
     /**
+     * Get list method to pet kind
+     *
      * @param SearchCriteriaInterface|null $searchCriteria
      * @return SearchResultsInterface
      */
@@ -154,6 +162,8 @@ class PetKindRepository implements PetKindRepositoryInterface
     }
 
     /**
+     * Delete by id method to pet kind
+     *
      * @param int $id
      * @return bool
      * @throws CouldNotDeleteException

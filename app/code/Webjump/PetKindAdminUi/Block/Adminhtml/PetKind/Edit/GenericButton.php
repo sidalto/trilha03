@@ -20,7 +20,7 @@ abstract class GenericButton
     private Context $context;
 
     /**
-     * Constructor
+     * Constructor to generic button class
      *
      * @param Context $context
      */

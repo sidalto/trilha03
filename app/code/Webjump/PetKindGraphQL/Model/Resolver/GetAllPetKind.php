@@ -43,8 +43,13 @@ class GetAllPetKind implements ResolverInterface
      * @param array|null $args
      * @return ExtensibleDataInterface[]
      */
-    public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null): array
-    {
+    public function resolve(
+        Field $field,
+        $context,
+        ResolveInfo $info,
+        array $value = null,
+        array $args = null
+    ): array {
         return $this->petKindRepositoryInterface
             ->getList()
             ->getItems();

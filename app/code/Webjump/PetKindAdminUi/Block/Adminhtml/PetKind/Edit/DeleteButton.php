@@ -15,6 +15,8 @@ use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 class DeleteButton extends GenericButton implements ButtonProviderInterface
 {
     /**
+     * Get data in the delete button
+     *
      * @return array
      */
     public function getButtonData(): array

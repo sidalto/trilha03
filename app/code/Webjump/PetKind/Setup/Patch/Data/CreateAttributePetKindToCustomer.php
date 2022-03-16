@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace Webjump\PetKind\Setup\Patch\Data;
 
 use Webjump\PetKind\Model\Config\Source\SelectPetKind;
-use Webjump\PetKind\Model\Config\Source\SelectPetName;
 use Magento\Customer\Api\CustomerMetadataInterface;
 use Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
 use Magento\Customer\Model\ResourceModel\Attribute as AttributeResource;
@@ -51,6 +50,8 @@ class CreateAttributePetKindToCustomer implements DataPatchInterface, PatchRever
     public const ATTRIBUTE_CODE = 'pet_kind';
 
     /**
+     * Constructor to CreateAttributePetKindToCustomer class
+     *
      * @param ModuleDataSetupInterface $moduleDataSetup
      * @param CustomerSetupFactory $customerSetupFactory
      * @param AttributeResource $attributeResource

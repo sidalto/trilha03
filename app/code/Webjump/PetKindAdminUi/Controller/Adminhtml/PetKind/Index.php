@@ -17,13 +17,14 @@ use Webjump\PetKindAdminUi\Controller\Adminhtml\Base;
 class Index extends Base implements HttpGetActionInterface
 {
     /**
-     * Execute method
+     * Execute method to Index controller
      *
      * @return ResultInterface
      */
     public function execute(): ResultInterface
     {
         $resultPage = $this->resultPageFactory->create();
+
         $resultPage->getConfig()
             ->getTitle()
             ->prepend(__('Pet Kinds'));

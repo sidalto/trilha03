@@ -52,8 +52,13 @@ class CreatePetKind implements ResolverInterface
      * @param array|null $args
      * @return int
      */
-    public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null): int
-    {
+    public function resolve(
+        Field $field,
+        $context,
+        ResolveInfo $info,
+        array $value = null,
+        array $args = null
+    ): int {
         $this->petKindInterface->setName($args['petKind']['name']);
         $this->petKindInterface->setDescription($args['petKind']['description']);
 
