@@ -19,6 +19,11 @@ use Magento\Customer\Api\CustomerRepositoryInterface;
 class CustomerRepositoryPlugin
 {
     /**
+     * @const ATTRIBUTE_CODE
+     */
+    const ATTRIBUTE_CODE = 'pet_name';
+
+    /**
      * @var CustomerInterface
      */
     private CustomerInterface $customer;
@@ -51,6 +56,27 @@ class CustomerRepositoryPlugin
     }
 
     /**
+     * Method to return configured extension attribute to customer
+     *
+     * @param CustomerInterface $customer
+     * @return CustomerInterface
+     */
+    public function setPetNameAttributeName(CustomerInterface $customer): CustomerInterface
+    {
+        $petName = $customer->getCustomAttribute(self::ATTRIBUTE_CODE);
+
+        if (!$petName) {
+            return $customer;
+        }
+
+        $extensionAttributes = $customer->getExtensionAttributes();
+        $extensionAttributes->setPetName($petName->getValue());
+        $customer->setExtensionAttributes($extensionAttributes);
+
+        return $customer;
+    }
+
+    /**
      * After plugin in the Repository get method
      *
      * @param CustomerRepositoryInterface $subject
@@ -61,12 +87,7 @@ class CustomerRepositoryPlugin
         CustomerRepositoryInterface $subject,
         CustomerInterface $result
     ): CustomerInterface {
-        $petName = $result->getCustomAttribute('pet_name')->getValue();
-        $extensionAttributes = $result->getExtensionAttributes();
-        $extensionAttributes->setPetName($petName);
-        $result->setExtensionAttributes($extensionAttributes);
-
-        return $result;
+        return $this->setPetNameAttributeName($result);
     }
 
     /**
@@ -82,12 +103,7 @@ class CustomerRepositoryPlugin
         CustomerInterface $result,
         int $customerId
     ): CustomerInterface {
-        $petName = $result->getCustomAttribute('pet_name')->getValue();
-        $extensionAttributes = $result->getExtensionAttributes();
-        $extensionAttributes->setPetName($petName);
-        $result->setExtensionAttributes($extensionAttributes);
-
-        return $result;
+        return $this->setPetNameAttributeName($result);
     }
 
     /**
@@ -106,12 +122,8 @@ class CustomerRepositoryPlugin
         $customers = [];
 
         foreach ($results->getItems() as $entity) {
-            $petName = $entity->getCustomAttribute('pet_name')->getValue();
-            $extensionAttributes = $entity->getExtensionAttributes();
-            $extensionAttributes->setPetName($petName);
-            $entity->setExtensionAttributes($extensionAttributes);
-
-            $customers[] = $entity;
+            $customer = $this->setPetNameAttributeName($entity);
+            $customers[] = $customer;
         }
 
         $results->setItems($customers);
