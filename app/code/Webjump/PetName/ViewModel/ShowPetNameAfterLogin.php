@@ -23,6 +23,11 @@ use Magento\Framework\Exception\LocalizedException;
 class ShowPetNameAfterLogin implements ArgumentInterface
 {
     /**
+     * @const ATTRIBUTE_CODE
+     */
+    const ATTRIBUTE_CODE = 'pet_name';
+
+    /**
      * @var Config
      */
     private Config $config;
@@ -133,7 +138,7 @@ class ShowPetNameAfterLogin implements ArgumentInterface
     {
         $petKindId = $this
             ->getCustomer()
-            ->getCustomAttribute('pet_kind')
+            ->getCustomAttribute(self::ATTRIBUTE_CODE)
             ->getValue();
 
         return $this->petKindRepository

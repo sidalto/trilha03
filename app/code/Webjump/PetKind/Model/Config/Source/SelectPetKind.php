@@ -49,7 +49,7 @@ class SelectPetKind extends AbstractSource implements OptionSourceInterface
             if ($petKindCollection->getSize()) {
                 foreach ($petKindCollection->getItems() as $petKind) {
                     $this->_options[] = [
-                        'label' => $petKind->getName(),
+                        'label' => __($petKind->getName()),
                         'value' => $petKind->getEntityId()
                     ];
                 }
