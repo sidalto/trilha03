@@ -36,10 +36,10 @@ interface PetKindRepositoryInterface
     /**
      * List Pet Kind that match specified search criteria.
      *
-     * @param SearchCriteriaInterface $searchCriteria
+     * @param SearchCriteriaInterface|null $searchCriteria
      * @return SearchResultsInterface
      */
-    public function getList(SearchCriteriaInterface $searchCriteria): SearchResultsInterface;
+    public function getList(SearchCriteriaInterface $searchCriteria = null): SearchResultsInterface;
 
     /**
      * Delete a specified pet kind.
