@@ -21,9 +21,9 @@ class Edit extends Base implements HttpGetActionInterface
     /**
      * Execute method to Edit controller
      *
-     * @return ResponseInterface|ResultInterface
+     * @return ResultInterface
      */
-    public function execute()
+    public function execute(): ResultInterface
     {
         $id = (int)$this->request->getParam('entity_id');
 
@@ -40,14 +40,11 @@ class Edit extends Base implements HttpGetActionInterface
         }
 
         $resultPage = $this->resultPageFactory->create();
-        $this->initPage($resultPage)
-            ->addBreadcrumb(
-                $id ? __('Edit Pet Kind') : __('New Pet Kind'),
-                $id ? __('Edit Pet Kind') : __('New Pet Kind')
-            );
-        $resultPage->getConfig()
-            ->getTitle()
-            ->prepend(__('Pet Kind'));
+
+        $resultPage->addBreadcrumb(
+            $id ? __('Edit Pet Kind') : __('New Pet Kind'),
+            $id ? __('Edit Pet Kind') : __('New Pet Kind')
+        );
 
         $resultPage->getConfig()
             ->getTitle()

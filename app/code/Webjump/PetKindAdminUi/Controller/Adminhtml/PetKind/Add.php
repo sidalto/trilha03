@@ -11,14 +11,11 @@ declare(strict_types=1);
 namespace Webjump\PetKindAdminUi\Controller\Adminhtml\PetKind;
 
 use Magento\Backend\App\Action;
-use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Action\HttpGetActionInterface;
-use Magento\Framework\App\ResponseInterface;
-use Magento\Framework\Controller\Result\Redirect;
 use Magento\Framework\Controller\ResultInterface;
-use Magento\Framework\View\Result\PageFactory;
+use Webjump\PetKindAdminUi\Controller\Adminhtml\Base;
 
-class Add extends Action implements HttpGetActionInterface
+class Add extends Base implements HttpGetActionInterface
 {
     /**
      * Execute method to Add controller

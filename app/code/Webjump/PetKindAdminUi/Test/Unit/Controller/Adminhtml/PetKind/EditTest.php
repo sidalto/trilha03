@@ -1,0 +1,265 @@
+<?php
+/**
+ * @author      Webjump Develop Team <dev@webjump.com.br>
+ * @copyright   2022 Webjump (http://www.webjump.com.br)
+ * @license     http://www.webjump.com.br Copyright
+ * @link        http://www.webjump.com.br
+ */
+
+declare(strict_types=1);
+
+namespace Webjump\PetKindAdminUi\Test\Unit\Controller\Adminhtml\PetKind;
+
+use Magento\Backend\Model\View\Result\ForwardFactory;
+use Magento\Framework\App\Request\DataPersistorInterface;
+use Magento\Framework\App\RequestInterface;
+use Magento\Framework\Message\ManagerInterface as MessageManagerInterface;
+use Magento\Framework\View\Result\PageFactory;
+use PHPUnit\Framework\TestCase;
+use Magento\Framework\Controller\ResultFactory;
+use Magento\Framework\Controller\Result\RedirectFactory;
+use Magento\Framework\Controller\Result\Redirect;
+use Magento\Framework\Controller\ResultInterface;
+use Magento\Backend\App\Action\Context;
+use Magento\Backend\Model\View\Result\Page;
+use Webjump\PetKind\Api\Data\PetKindInterface;
+use Webjump\PetKind\Model\Data\PetKind;
+use Webjump\PetKind\Api\PetKindRepositoryInterface;
+use Webjump\PetKind\Model\Data\PetKindFactory;
+use Magento\Framework\View\Page\Config;
+use Magento\Framework\View\Page\Title;
+use Webjump\PetKindAdminUi\Controller\Adminhtml\PetKind\Edit;
+use Webjump\PetKindAdminUi\Controller\Adminhtml\Base;
+
+class EditTest extends TestCase
+{
+    /**
+     * @var ResultFactory
+     */
+    private ResultFactory $resultFactory;
+
+    /**
+     * @var ResultInterface
+     */
+    private ResultInterface $resultInterface;
+
+    /**
+     * @var RedirectFactory
+     */
+    private RedirectFactory $redirectFactory;
+
+    /**
+     * @var Redirect
+     */
+    private Redirect $redirect;
+
+    /**
+     * @var Context
+     */
+    private Context $context;
+
+    /**
+     * @var PetKindRepositoryInterface
+     */
+    private PetKindRepositoryInterface $petKindRepository;
+
+    /**
+     * @var PetKindFactory
+     */
+    private PetKindFactory $petKindFactory;
+
+    /**
+     * @var ForwardFactory
+     */
+    private ForwardFactory $resultForwardFactory;
+
+    /**
+     * @var PetKind
+     */
+    private PetKind $petKind;
+
+    /**
+     * @var PetKindInterface
+     */
+    private PetKindInterface $petKindInterface;
+
+    /**
+     * @var PageFactory
+     */
+    private PageFactory $resultPageFactory;
+
+    /**
+     * @var Page
+     */
+    private Page $page;
+
+    /**
+     * @var Config
+     */
+    private Config $pageConfig;
+
+    /**
+     * @var Title
+     */
+    private Title $pageTitle;
+
+    /**
+     * @var MessageManagerInterface
+     */
+    private MessageManagerInterface $messageManager;
+
+    /**
+     * @var RequestInterface
+     */
+    private RequestInterface $request;
+
+    /**
+     * @var DataPersistorInterface
+     */
+    private DataPersistorInterface $dataPersistor;
+
+    /**
+     * @var Base
+     */
+    private Base $base;
+
+    /**
+     * @return void
+     */
+    public function setUp(): void
+    {
+        $this->resultFactory = $this->createMock(ResultFactory::class);
+        $this->redirectFactory = $this->createMock(RedirectFactory::class);
+        $this->redirect = $this->createMock(Redirect::class);
+        $this->resultInterface = $this->createMock(ResultInterface::class);
+        $this->context = $this->createMock(Context::class);
+        $this->petKindRepository = $this->createMock(PetKindRepositoryInterface::class);
+        $this->petKindFactory = $this->createMock(PetKindFactory::class);
+        $this->petKindInterface = $this->createMock(PetKindInterface::class);
+        $this->petKind = $this->createMock(PetKind::class);
+        $this->resultForwardFactory = $this->createMock(ForwardFactory::class);
+        $this->resultPageFactory = $this->createMock(PageFactory::class);
+        $this->page = $this->createMock(Page::class);
+        $this->messageManager = $this->createMock(MessageManagerInterface::class);
+        $this->request = $this->createMock(RequestInterface::class);
+        $this->dataPersistor = $this->createMock(DataPersistorInterface::class);
+        $this->base = $this->createMock(Base::class);
+        $this->edit = $this->createMock(Edit::class);
+        $this->pageConfig = $this->createMock(Config::class);
+        $this->pageTitle = $this->createMock(Title::class);
+
+        $this->testSubject = new Edit(
+            $this->context,
+            $this->petKindRepository,
+            $this->petKindFactory,
+            $this->redirectFactory,
+            $this->resultForwardFactory,
+            $this->resultPageFactory,
+            $this->messageManager,
+            $this->request,
+            $this->dataPersistor
+        );
+    }
+
+    /**
+     * Test execute method
+     *
+     * @return void
+     */
+    public function testExecute()
+    {
+        $id = 1;
+
+        $this->request
+            ->expects($this->once())
+            ->method('getParam')
+            ->with('entity_id')
+            ->willReturn($id);
+
+        $this->petKindRepository
+            ->expects($this->once())
+            ->method('getById')
+            ->with($id)
+            ->willReturn($this->petKindInterface);
+
+        $this->petKindInterface
+            ->expects($this->any())
+            ->method('getEntityId')
+            ->willReturn($id);
+
+        $this->resultPageFactory
+            ->expects($this->once())
+            ->method('create')
+            ->willReturn($this->page);
+
+        $this->page
+            ->expects($this->once())
+            ->method('addBreadcrumb')
+            ->with(__('Edit Pet Kind'), __('Edit Pet Kind'))
+            ->willReturnSelf();
+
+        $this->page
+            ->expects($this->once())
+            ->method('getConfig')
+            ->willReturn($this->pageConfig);
+
+        $this->pageConfig
+            ->expects($this->once())
+            ->method('getTitle')
+            ->willReturn($this->pageTitle);
+
+        $this->pageTitle
+            ->expects($this->once())
+            ->method('prepend')
+            ->with(__('Edit Pet Kind %1', $id));
+
+        $this->assertSame($this->page, $this->testSubject->execute());
+    }
+
+    /**
+     * Test pet kind is not found exception
+     *
+     * @return void
+     */
+    public function testPetKindIsNotFound()
+    {
+        $id = 1;
+        $exception = new \Exception();
+
+        $this->request
+            ->expects($this->once())
+            ->method('getParam')
+            ->with('entity_id')
+            ->willReturn($id);
+
+        $this->redirectFactory
+            ->expects($this->once())
+            ->method('create')
+            ->willReturn($this->redirect);
+
+        $this->petKindRepository
+            ->expects($this->once())
+            ->method('getById')
+            ->with($id)
+            ->willReturn($this->petKindInterface);
+
+        $this->petKindInterface
+            ->expects($this->once())
+            ->method('getEntityId')
+            ->willThrowException($exception);
+
+        $this->messageManager
+            ->expects($this->once())
+            ->method('addErrorMessage')
+            ->with(__('This Pet Kind no longer exists.'))
+            ->willReturnSelf();
+
+        $this->redirect
+            ->expects($this->once())
+            ->method('setPath')
+            ->with('*/*/')
+            ->willReturnSelf();
+
+        $this->assertSame($this->redirect, $this->testSubject->execute());
+    }
+}

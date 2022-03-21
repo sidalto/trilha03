@@ -20,6 +20,26 @@ use Webjump\PetKind\Model\ResourceModel\PetKind as ResourceModel;
 class PetKindTest extends TestCase
 {
     /**
+     * @var ResourceModel
+     */
+    private ResourceModel $resourceModel;
+
+    /**
+     * @var Context
+     */
+    private Context $context;
+
+    /**
+     * @var Registry
+     */
+    private Registry $registry;
+
+    /**
+     * @var DataObject
+     */
+    private DataObject $dataObject;
+
+    /**
      * Set up method
      *
      * @return void

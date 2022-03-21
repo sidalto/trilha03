@@ -19,8 +19,6 @@ use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 use Magento\Framework\Api\SearchResultsInterface;
 use Magento\Framework\Api\SearchResultsFactory;
-use Magento\Framework\Api\SortOrder;
-use Magento\Framework\Api\SortOrderBuilder;
 use Webjump\PetKind\Api\Data\PetKindInterface;
 use Webjump\PetKind\Api\Data\PetKindInterfaceFactory;
 use Webjump\PetKind\Api\PetKindRepositoryInterface;
@@ -60,11 +58,6 @@ class PetKindRepository implements PetKindRepositoryInterface
     private SearchCriteriaBuilder $searchCriteriaBuilder;
 
     /**
-     * @var CollectionProcessorInterface
-     */
-    private CollectionProcessorInterface $collectionProcessorInterface;
-
-    /**
      * Constructor to PetKindRepository class
      *
      * @param PetKindInterfaceFactory $petKindInterfaceFactory
@@ -95,21 +88,12 @@ class PetKindRepository implements PetKindRepositoryInterface
      * Save method to pet kind
      *
      * @param PetKindInterface $pet
-     * @param int $id
      * @return int
      * @throws CouldNotSaveException
      */
-    public function save(PetKindInterface $pet, int $id = 0): int
+    public function save(PetKindInterface $pet): int
     {
         try {
-            $existingPet = $this->getById($id);
-
-            if ($existingPet->getEntityId()) {
-                $existingPet->setName($pet->getName());
-                $existingPet->setDescription($pet->getDescription());
-                $pet = $existingPet;
-            }
-
             $this->petKindResourceModel->save($pet);
 
             return $pet->getEntityId();

@@ -21,10 +21,9 @@ interface PetKindRepositoryInterface
      * Save the pet kind entity
      *
      * @param PetKindInterface $pet
-     * @param int $id
      * @return int
      */
-    public function save(PetKindInterface $pet, int $id = 0): int;
+    public function save(PetKindInterface $pet): int;
 
     /**
      * Load a specified pet kind by ID

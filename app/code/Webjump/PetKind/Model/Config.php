@@ -44,10 +44,6 @@ class Config implements ConfigInterface
      */
     public function isEnabled(?string $scopeCode): bool
     {
-        if (empty($scopeCode)) {
-            return $this->scopeConfig->isSetFlag(self::PET_KIND_PATH);
-        }
-
         return $this->scopeConfig->isSetFlag(
             self::PET_KIND_PATH,
             ScopeInterface::SCOPE_STORE,

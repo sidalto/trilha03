@@ -19,6 +19,21 @@ use Webjump\PetKind\Model\ResourceModel\PetKind\CollectionFactory;
 class SelectPetKindTest extends TestCase
 {
     /**
+     * @var CollectionFactory
+     */
+    private CollectionFactory $collectionFactory;
+
+    /**
+     * @var Collection
+     */
+    private Collection $collection;
+
+    /**
+     * @var PetKindInterface
+     */
+    private PetKindInterface $petKind;
+
+    /**
      * @return void
      */
     public function setUp(): void
@@ -42,27 +57,33 @@ class SelectPetKindTest extends TestCase
             'value' => 1
         ];
 
-        $this->collectionFactory->expects($this->once())
+        $this->collectionFactory
+            ->expects($this->once())
             ->method('create')
             ->willReturn($this->collection);
 
-        $this->collection->expects($this->once())
+        $this->collection
+            ->expects($this->once())
             ->method('load')
             ->willReturnSelf();
 
-        $this->collection->expects($this->once())
+        $this->collection
+            ->expects($this->once())
             ->method('getSize')
             ->willReturn(1);
 
-        $this->collection->expects($this->once())
+        $this->collection
+            ->expects($this->once())
             ->method('getItems')
             ->willReturn([$this->petKind]);
 
-        $this->petKind->expects($this->once())
+        $this->petKind
+            ->expects($this->once())
             ->method('getName')
             ->willReturn('Cão');
 
-        $this->petKind->expects($this->once())
+        $this->petKind
+            ->expects($this->once())
             ->method('getEntityId')
             ->willReturn(1);
 
@@ -79,6 +100,7 @@ class SelectPetKindTest extends TestCase
             'value' => 1
         ];
 
+        $this->testToOptionArray();
         $result = $this->testSubject->getAllOptions();
 
         $this->assertIsArray($result);

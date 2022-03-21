@@ -12,7 +12,6 @@ namespace Webjump\PetKindAdminUi\Controller\Adminhtml\PetKind;
 
 use Exception;
 use Magento\Framework\App\Action\HttpPostActionInterface;
-use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Webjump\PetKindAdminUi\Controller\Adminhtml\Base;
@@ -31,10 +30,8 @@ class Save extends Base implements HttpPostActionInterface
         $data = $this->request->getPostValue();
 
         if (!$data) {
-            return $resultRedirect->setPath('*/*');
+            return $resultRedirect->setPath('*/*/');
         }
-
-        $requestEntityId = $this->request->getParam('entity_id');
 
         try {
             $model = $this->petKindFactory->create();
@@ -42,10 +39,6 @@ class Save extends Base implements HttpPostActionInterface
             $this->petKindRepository->save($model);
             $this->messageManager->addSuccessMessage(__('You saved the Pet Kind.'));
             $this->dataPersistor->clear('pets_petkind_form_data_source');
-
-            if ($this->request->getParam('back')) {
-                return $resultRedirect->setPath('*/*/edit', ['entity_id' => $model->getEntityId()]);
-            }
 
             return $resultRedirect->setPath('*/*/');
         } catch (LocalizedException $e) {
@@ -56,6 +49,6 @@ class Save extends Base implements HttpPostActionInterface
 
         $this->dataPersistor->set('pets_petkind_form_data_source', $data);
 
-        return $resultRedirect->setPath('*/*/edit', ['entity_id' => $requestEntityId]);
+        return $resultRedirect->setPath('*/*/edit', ['entity_id' => $this->request->getParam('entity_id')]);
     }
 }

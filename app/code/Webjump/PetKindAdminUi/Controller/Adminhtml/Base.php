@@ -110,9 +110,6 @@ abstract class Base extends Action
      */
     public function initPage(Page $resultPage): Page
     {
-        $resultPage->addBreadcrumb(__('Pets'), __('Pets'))
-            ->addBreadcrumb(__('Pet Kind'), __('Pet Kind'));
-
         return $resultPage;
     }
 }
