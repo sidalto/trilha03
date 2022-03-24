@@ -17,13 +17,13 @@ $viewModel = $block->getViewModel();
 
 <?php if ($viewModel->isLoggedIn() && $viewModel->isModuleEnable()): ?>
     <li class="customer-welcome">
-        <a href="#">
-            <?php echo __(
-                'Nome do Pet: '
-                . $viewModel->getPetNameCustomer()
-                . " | Tipo: "
-                . $viewModel->getPetKindCustomer())
+<!--        <a href="#">-->
+            <?= __('Nome do Pet: '
+                    . $viewModel->getPetNameCustomer()
+                    . " | Tipo: "
+                    . $viewModel->getPetKindCustomer()
+                )
             ?>
-        </a>
+<!--        </a>-->
     </li>
 <?php endif; ?>

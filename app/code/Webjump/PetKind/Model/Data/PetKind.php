@@ -39,9 +39,9 @@ class PetKind extends AbstractModel implements PetKindInterface
     /**
      * Get the pet kind name
      *
-     * @return string
+     * @return string|null
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->getData(self::NAME);
     }
@@ -60,9 +60,9 @@ class PetKind extends AbstractModel implements PetKindInterface
     /**
      * Get the pet kind description
      *
-     * @return string
+     * @return string|null
      */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->getData(self::DESCRIPTION);
     }

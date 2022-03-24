@@ -25,7 +25,7 @@ class ShowPetNameAfterLogin implements ArgumentInterface
     /**
      * @const ATTRIBUTE_CODE
      */
-    const ATTRIBUTE_CODE = 'pet_name';
+    const ATTRIBUTE_CODE = 'pet_kind';
 
     /**
      * @var Config

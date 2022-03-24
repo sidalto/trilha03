@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Webjump\PetName\Test\Unit\ViewModel;
 
 use Magento\Customer\Api\Data\CustomerInterface;
+use Webjump\PetKind\Api\Data\PetKindInterface;
 use Webjump\PetKind\Api\PetKindRepositoryInterface;
 use Webjump\PetKind\Model\Config;
 use Magento\Customer\Api\CustomerRepositoryInterface;
@@ -22,6 +23,7 @@ use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Webjump\PetName\ViewModel\ShowPetNameAfterLogin;
 use Magento\Customer\Api\Data\CustomerExtensionInterface;
+use Magento\Framework\Api\AttributeInterface;
 
 class ShowPetNameAfterLoginTest extends \PHPUnit\Framework\TestCase
 {
@@ -71,6 +73,11 @@ class ShowPetNameAfterLoginTest extends \PHPUnit\Framework\TestCase
     private CustomerExtensionInterface $customerExtension;
 
     /**
+     * @var AttributeInterface
+     */
+    private AttributeInterface $attribute;
+
+    /**
      * @return void
      */
     public function setUp(): void
@@ -81,8 +88,10 @@ class ShowPetNameAfterLoginTest extends \PHPUnit\Framework\TestCase
         $this->store = $this->createMock(StoreInterface::class);
         $this->customerRepository = $this->createMock(CustomerRepositoryInterface::class);
         $this->petKindRepository = $this->createMock(PetKindRepositoryInterface::class);
+        $this->petKind = $this->createMock(PetKindInterface::class);
         $this->customer = $this->createMock(CustomerInterface::class);
         $this->customerExtension = $this->createMock(CustomerExtensionInterface::class);
+        $this->attribute = $this->createMock(AttributeInterface::class);
 
         $this->testSubject = new ShowPetNameAfterLogin(
             $this->session,
@@ -207,25 +216,81 @@ class ShowPetNameAfterLoginTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($this->customer, $result);
     }
 
-//    /**
-//     * @throws NoSuchEntityException
-//     * @throws LocalizedException
-//     */
-//    public function testGetPetNameCustomer()
-//    {
-//        $this->customer
-//            ->expects($this->once())
-//            ->method('getExtensionAttributes')
-//            ->with(self::ATTRIBUTE_CODE)
-//            ->willReturn($this->customerExtension);
-//
-//        $this->customerExtension
-//            ->expects($this->once())
-//            ->method('getPetName')
-//            ->willReturn('Totó');
-//
-//        $result = $this->testSubject->getPetNameCustomer();
-//        $this->assertIsString($result);
-//        $this->assertEquals('Totó', $result);
-//    }
+    /**
+     * @throws NoSuchEntityException
+     * @throws LocalizedException
+     */
+    public function testGetPetNameCustomer()
+    {
+        $this->session
+            ->expects($this->once())
+            ->method('getCustomerId')
+            ->willReturn(1);
+
+        $this->customerRepository
+            ->expects($this->once())
+            ->method('getById')
+            ->with(1)
+            ->willReturn($this->customer);
+
+        $this->customer
+            ->expects($this->once())
+            ->method('getExtensionAttributes')
+            ->willReturn($this->customerExtension);
+
+        $this->customerExtension
+            ->expects($this->once())
+            ->method('getPetName')
+            ->willReturn('Kit Kat');
+
+        $result = $this->testSubject->getPetNameCustomer();
+        $this->assertIsString($result);
+        $this->assertEquals('Kit Kat', $result);
+    }
+
+    /**
+     * @throws NoSuchEntityException
+     * @throws LocalizedException
+     */
+    public function testGetPetKindCustomer()
+    {
+        $this->session
+            ->expects($this->once())
+            ->method('getCustomerId')
+            ->willReturn(1);
+
+        $this->customerRepository
+            ->expects($this->once())
+            ->method('getById')
+            ->with(1)
+            ->willReturn($this->customer);
+
+        $this->customer
+            ->expects($this->once())
+            ->method('getCustomAttribute')
+            ->with('pet_kind')
+            ->willReturn($this->attribute);
+
+        $this->attribute
+            ->expects($this->once())
+            ->method('getValue')
+            ->willReturn(1);
+
+        $this->petKindRepository
+            ->expects($this->once())
+            ->method('getById')
+            ->with(1)
+            ->willReturn($this->petKind);
+
+        $this->petKind
+            ->expects($this->once())
+            ->method('getName')
+            ->willReturn('Gato');
+
+        $result = $this->testSubject->getPetKindCustomer();
+        $this->assertIsString($result);
+        $this->assertEquals('Gato', $result);
+
+
+    }
 }

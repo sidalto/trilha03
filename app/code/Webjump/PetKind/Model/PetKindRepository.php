@@ -88,12 +88,23 @@ class PetKindRepository implements PetKindRepositoryInterface
      * Save method to pet kind
      *
      * @param PetKindInterface $pet
+     * @param int|null $id
      * @return int
      * @throws CouldNotSaveException
      */
-    public function save(PetKindInterface $pet): int
+    public function save(PetKindInterface $pet, int $id = null): int
     {
         try {
+            if ($id) {
+                $existingPet = $this->getById($id);
+
+                if ($existingPet) {
+                    $existingPet->setName($pet->getName());
+                    $existingPet->setDescription($pet->getDescription());
+                    $pet = $existingPet;
+                }
+            }
+
             $this->petKindResourceModel->save($pet);
 
             return $pet->getEntityId();
@@ -106,10 +117,10 @@ class PetKindRepository implements PetKindRepositoryInterface
      * Get by id method to pet kind
      *
      * @param int $id
-     * @return PetKindInterface
+     * @return PetKindInterface|null
      * @throws NoSuchEntityException
      */
-    public function getById(int $id): PetKindInterface
+    public function getById(int $id): ?PetKindInterface
     {
         try {
             $petKind = $this->petKindInterfaceFactory->create();

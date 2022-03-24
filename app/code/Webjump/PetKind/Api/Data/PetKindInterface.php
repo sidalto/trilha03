@@ -39,9 +39,9 @@ interface PetKindInterface
     /**
      * Get the pet kind
      *
-     * @return string
+     * @return string|null
      */
-    public function getName(): string;
+    public function getName(): ?string;
 
     /**
      * Set the pet kind name
@@ -54,9 +54,9 @@ interface PetKindInterface
     /**
      * Get the pet kind description
      *
-     * @return string
+     * @return string|null
      */
-    public function getDescription(): string;
+    public function getDescription(): ?string;
 
     /**
      * Set the pet kind description

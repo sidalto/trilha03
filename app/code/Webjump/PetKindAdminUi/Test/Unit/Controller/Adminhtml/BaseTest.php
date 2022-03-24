@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace Webjump\PetKindAdminUi\Test\Unit\Controller\Adminhtml\PetKind;
+namespace Webjump\PetKindAdminUi\Test\Unit\Controller\Adminhtml;
 
 use Magento\Backend\Model\View\Result\ForwardFactory;
 use Magento\Framework\App\Request\DataPersistorInterface;
@@ -144,11 +144,9 @@ class BaseTest extends TestCase
         $this->request = $this->createMock(RequestInterface::class);
         $this->dataPersistor = $this->createMock(DataPersistorInterface::class);
         $this->base = $this->createMock(Base::class);
-        $this->edit = $this->createMock(Edit::class);
+        $this->add = $this->createMock(Base::class);
         $this->pageConfig = $this->createMock(Config::class);
         $this->pageTitle = $this->createMock(Title::class);
-
-
     }
 
     /**
@@ -158,6 +156,8 @@ class BaseTest extends TestCase
      */
     public function testInitPage()
     {
-        $this->assertInstanceOf(Page::class, $this->page);
+        $result = $this->add->initPage($this->page);
+        $this->assertInstanceOf(Page::class, $result);
+        $this->assertEquals($this->add->initPage($this->page), $result);
     }
 }

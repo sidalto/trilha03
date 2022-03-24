@@ -21,17 +21,18 @@ interface PetKindRepositoryInterface
      * Save the pet kind entity
      *
      * @param PetKindInterface $pet
+     * @param int|null $id
      * @return int
      */
-    public function save(PetKindInterface $pet): int;
+    public function save(PetKindInterface $pet, int $id = null): int;
 
     /**
      * Load a specified pet kind by ID
      *
      * @param int $id
-     * @return PetKindInterface
+     * @return PetKindInterface|null
      */
-    public function getById(int $id): PetKindInterface;
+    public function getById(int $id): ?PetKindInterface;
 
     /**
      * List Pet Kind that match specified search criteria.

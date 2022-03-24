@@ -93,6 +93,17 @@ class PetKindTest extends TestCase
     }
 
     /**
+     * Test get pet name method return null
+     *
+     * @return void
+     */
+    public function testIfNullGetName()
+    {
+        $result = $this->testSubject->getName();
+        $this->assertNull($result);
+    }
+
+    /**
      * Test set pet name method
      *
      * @return void
@@ -104,7 +115,7 @@ class PetKindTest extends TestCase
     }
 
     /**
-     * Test get pet description id method
+     * Test get pet description method
      *
      * @return void
      */
@@ -115,7 +126,18 @@ class PetKindTest extends TestCase
     }
 
     /**
-     * Test set pet description id method
+     * Test get pet description method return null
+     *
+     * @return void
+     */
+    public function testIfNullGetDescription()
+    {
+        $result = $this->testSubject->getDescription();
+        $this->assertNull($result);
+    }
+
+    /**
+     * Test set pet description method
      *
      * @return void
      */

@@ -159,6 +159,59 @@ class PetKindRepositoryTest extends TestCase
     }
 
     /**
+     * @throws CouldNotSaveException
+     */
+    public function testIsUpdateOnSaveMethod()
+    {
+        $id = 2;
+
+        $this->petKindInterfaceFactory
+            ->expects($this->once())
+            ->method('create')
+            ->willReturn($this->petKind);
+
+        $this->petKindResourceModel
+            ->expects($this->once())
+            ->method('load')
+            ->with($this->petKind, $id)
+            ->willReturn($this->petKind);
+
+        $this->petKind
+            ->expects($this->once())
+            ->method('getEntityId')
+            ->willReturn($id);
+
+        $this->petKind
+            ->expects($this->once())
+            ->method('getName')
+            ->willReturn('Gato');
+
+        $this->petKind
+            ->expects($this->once())
+            ->method('setName')
+            ->with('Gato');
+
+        $this->petKind
+            ->expects($this->once())
+            ->method('getDescription')
+            ->willReturn('Peludo');
+
+        $this->petKind
+            ->expects($this->once())
+            ->method('setDescription')
+            ->with('Peludo');
+
+        $this->petKindResourceModel
+            ->expects($this->once())
+            ->method('save')
+            ->with($this->petKind)
+            ->willReturnSelf();
+
+        $result = $this->testSubject->save($this->petKind, $id);
+        $this->assertEquals($id, $result);
+    }
+
+    /**
      * Test get method should throw exception
      *
      * @throws NoSuchEntityException
